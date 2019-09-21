@@ -1,0 +1,26 @@
+{
+  "name": "ticket-support-system",
+  "version": "1.0.0",
+  "description": "Project related to Hassan",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ralmarri12/ticket-support-system.git"
+  },
+  "keywords": [
+    "ticket",
+    "support"
+  ],
+  "author": "Rashid F., Hassan F.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ralmarri12/ticket-support-system/issues"
+  },
+  "homepage": "https://github.com/ralmarri12/ticket-support-system#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

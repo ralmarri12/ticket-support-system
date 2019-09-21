@@ -4,7 +4,7 @@
   "description": "Project related to Hassan",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/ralmarri12/ticket-support-system#readme",
   "dependencies": {
+    "dotenv": "^8.1.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
   }
 }

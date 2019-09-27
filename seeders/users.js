@@ -1,7 +1,7 @@
-module.exports = [
+ users = [
   {
     id: 1,
-    email: "r.almarri12@gmail.com",
+    email: "r.almi12@gmail.com",
     password: "12341234",
     name: "Rashid F."
   },
@@ -12,9 +12,11 @@ module.exports = [
     name: "Samook."
   },
   {
-    id: 2,
+    id: 3,
     email: "hassan@gmail.com",
     password: "1212121212",
     name: "Hassan F."
   }
 ];
+
+module.exports = users; 

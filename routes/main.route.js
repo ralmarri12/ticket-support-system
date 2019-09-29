@@ -14,6 +14,15 @@ Router.get("/tickets", getTickets);
 
 const { addTicket } = require("../controllers/tickets.controller");
 Router.post("/tickets", addTicket);
-//#endregion (Ticket routes)
+//#endregion (Ticket routes) 
+
+//#region (Comment Routes) 
+const {getComments} = require("../controllers/comments.controller"); 
+Router.get("/comments", getComments);
+
+const {postComment} = require("../controllers/comments.controller"); 
+Router.post("/comments", postComment);
+
+//#endregion
 
 module.exports = Router;

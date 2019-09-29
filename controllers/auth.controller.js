@@ -1,4 +1,3 @@
-const users = require("../seeders/users");
 const bcrypt = require("bcrypt");
 
 const UserModel = require("../models").User;
@@ -9,7 +8,13 @@ const login = async (req, res) => {
 
   // Check authentication
 
-  const foundUser = users.find(user => user.email == email);
+  // const foundUser = users.find(user => user.email == email);
+
+  const foundUser =  await UserModel.findOne({
+    where: {
+      email : email
+    }
+  }) 
 
   if (foundUser) {
     const checkPassword = await bcrypt.compare(password, foundUser.password);
@@ -37,7 +42,7 @@ const register = async (req, res) => {
   const password = req.body.password;
   const name = req.body.name;
 
-  // const foundEmail = users.find(user => user.email == email);
+  // const foundEmail = users.find(user => user.email == email); 
 
   // if (foundEmail) {
   //   return res.json({
@@ -52,7 +57,8 @@ const register = async (req, res) => {
   const usetToRegister = {
     name,
     email: email,
-    password: hashedPassword
+    password: hashedPassword,
+    g_id: "customer"
   };
 
   const result = await UserModel.create(usetToRegister);
@@ -70,3 +76,4 @@ module.exports = {
   login,
   register
 };
+ 

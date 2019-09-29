@@ -1,36 +1,30 @@
-const tickets = require("../seeders/tickets"); 
+const TicketModel = require("../models").Ticket;
 
+const getTickets =  async (req, res) => { 
+    const getAllTickets = await TicketModel.findAll();
 
-const getTickets = (req, res) => { 
-    res.send (tickets);  
+    res.json(getAllTickets); 
 }  
 
-
-const addTicket = (req, res) => { 
+const addTicket = async (req, res) => { 
 
     const u_id = req.body.u_id; 
     const description = req.body.description;  
 
-    const uuid = require('uuid');
-
-
-    const newObject = {
-        id: uuid.v4(), 
-        user_id: u_id, 
+    const ticketToAdd = {
+        u_id: u_id, 
         description: description, 
         status: "Received"
     }; 
 
-    tickets.push(newObject);  
+    const result = await TicketModel.create(ticketToAdd);
 
     return res.json ({ 
         message: "success", 
         data:  { 
-            newObject
+            result
         }
     }); 
 }
-
-
 
 module.exports = { getTickets, addTicket }; 

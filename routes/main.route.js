@@ -10,10 +10,10 @@ Router.post("/register", register);
 
 //#region ( Ticket routes)
 const { getTickets } = require("../controllers/tickets.controller");
-Router.get("/getTickets", getTickets);
+Router.get("/tickets", getTickets);
 
 const { addTicket } = require("../controllers/tickets.controller");
-Router.post("/addTicket", addTicket);
+Router.post("/tickets", addTicket);
 //#endregion (Ticket routes)
 
 module.exports = Router;

@@ -1,6 +1,5 @@
-const bcrypt = require("bcrypt"); 
-var jwt = require('jsonwebtoken');
-
+const bcrypt = require("bcrypt");
+var jwt = require("jsonwebtoken");
 
 const UserModel = require("../models").User;
 
@@ -8,28 +7,21 @@ const login = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  // Check authentication
-
-  // const foundUser = users.find(user => user.email == email);
-
-  const foundUser =  await UserModel.findOne({
+  const foundUser = await UserModel.findOne({
     where: {
-      email : email
+      email: email
     }
-  }) 
+  });
 
   if (foundUser) {
     const checkPassword = await bcrypt.compare(password, foundUser.password);
-    if (checkPassword) { 
+    if (checkPassword) {
+      const privateKey = "rashid";
+      const token = await jwt.sign({ foundUser }, privateKey);
 
-      // var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
-
-      const privateKey = "rashid"; 
-      const token =  await jwt.sign({ foundUser }, privateKey);
-      
       return res.json({
         message: "successful",
-        token: token,
+        token,
         data: {
           email,
           password
@@ -40,7 +32,6 @@ const login = async (req, res) => {
 
   return res.json({
     message: "failed",
-    // token: "adsfadsfa1ds2fasd23fa1dsfad32sf1ads2f1a",
     data: "wrong username or password"
   });
 };
@@ -49,15 +40,6 @@ const register = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const name = req.body.name;
-
-  // const foundEmail = users.find(user => user.email == email); 
-
-  // if (foundEmail) {
-  //   return res.json({
-  //     message: "failed",
-  //     data: "the given email already has a user in the system"
-  //   });
-  // }
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
@@ -71,9 +53,12 @@ const register = async (req, res) => {
 
   const result = await UserModel.create(usetToRegister);
 
+  const privateKey = "rashid";
+  const token = await jwt.sign({ result }, privateKey);
+
   return res.json({
     message: "successful",
-    token: "adsfadsfa1ds2fasd23fa1dsfad32sf1ads2f1a",
+    token,
     data: {
       result
     }
@@ -84,4 +69,3 @@ module.exports = {
   login,
   register
 };
- 

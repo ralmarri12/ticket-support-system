@@ -16,8 +16,7 @@ const login = async (req, res) => {
   if (foundUser) {
     const checkPassword = await bcrypt.compare(password, foundUser.password);
     if (checkPassword) {
-      const privateKey = "rashid";
-      const token = await jwt.sign({ foundUser }, privateKey);
+      const token = await jwt.sign(foundUser.dataValues, process.env.ENC_KEY);
 
       return res.json({
         message: "successful",
@@ -52,9 +51,7 @@ const register = async (req, res) => {
   };
 
   const result = await UserModel.create(usetToRegister);
-
-  const privateKey = "rashid";
-  const token = await jwt.sign({ result }, privateKey);
+  const token = await jwt.sign(result.dataValues, process.env.ENC_KEY);
 
   return res.json({
     message: "successful",

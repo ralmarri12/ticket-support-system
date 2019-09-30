@@ -16,7 +16,7 @@ const generateToken = async userInformation => {
 };
 
 const decodeToken = async token => {
-  return jwt.decode(token, { key: process.env.ENC_KEY });
+  return jwt.verify(token, process.env.ENC_KEY);
 };
 
 const compareHashedPassword = async (hashedPassword, plainPassword) => {

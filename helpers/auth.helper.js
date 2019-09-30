@@ -39,4 +39,27 @@ const login = async (email, password) => {
   throw new Error("WRONG_PASSWORD_OR_USERNAME");
 };
 
-module.exports = { login };
+  const register = async (name, email, password) => {
+    
+    const hashedPassword = await bcrypt.hash(password, 10); 
+    userToRegister = {
+      name,
+      email,
+      password: hashedPassword,
+      g_id: "customer", 
+    };
+    const result = await UserModel.create(userToRegister);
+    const token = await generateToken(result.dataValues);
+
+    if(result) {
+      return {
+        user: result,
+        token,
+      };
+    }
+
+    throw new Error("UNEXPECTED_ERROR");
+  }
+
+
+module.exports = { login, register };

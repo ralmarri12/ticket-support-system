@@ -23,7 +23,7 @@ const compareHashedPassword = async (hashedPassword, plainPassword) => {
   return bcrypt.compare(plainPassword, hashedPassword);
 };
 
-const login = async (email, password) => {
+const loginProcess = async (email, password) => {
   const user = await findUserByEmail(email);
   if (user) {
     const compareResult = await compareHashedPassword(user.password, password);
@@ -39,7 +39,7 @@ const login = async (email, password) => {
   throw new Error("WRONG_PASSWORD_OR_USERNAME");
 };
 
-const register = async (name, email, password) => {
+const registerProcess = async (name, email, password) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const userToRegister = {
@@ -62,4 +62,4 @@ const register = async (name, email, password) => {
   throw new Error("UNEXPECTED_ERROR");
 };
 
-module.exports = { login, register };
+module.exports = { loginProcess, registerProcess };

@@ -1,8 +1,8 @@
-const AuthHelper = require("../helpers/auth.helper");
+const { loginProcess, registerProcess } = require("../helpers/auth.helper");
 
 const login = async (req, res) => {
   try {
-    const foundUser = await AuthHelper.login(
+    const foundUser = await loginProcess(
       req.body.email.trim(),
       req.body.password.trim()
     );
@@ -22,7 +22,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const register = await AuthHelper.register(
+    const register = await registerProcess(
       req.body.name.trim(),
       req.body.email.trim(),
       req.body.password.trim()

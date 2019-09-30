@@ -62,4 +62,4 @@ const registerProcess = async (name, email, password) => {
   throw new Error("UNEXPECTED_ERROR");
 };
 
-module.exports = { loginProcess, registerProcess };
+module.exports = { loginProcess, registerProcess, decodeToken };

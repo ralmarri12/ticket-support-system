@@ -1,38 +1,23 @@
-const bcrypt = require("bcrypt");
-var jwt = require("jsonwebtoken");
-
-const UserModel = require("../models").User;
+const AuthHelper = require("../helpers/auth.helper");
 
 const login = async (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  try {
+    const foundUser = await AuthHelper.login(
+      req.body.email.trim(),
+      req.body.password.trim()
+    );
 
-  const foundUser = await UserModel.findOne({
-    where: {
-      email: email
-    }
-  });
-
-  if (foundUser) {
-    const checkPassword = await bcrypt.compare(password, foundUser.password);
-    if (checkPassword) {
-      const token = await jwt.sign(foundUser.dataValues, process.env.ENC_KEY);
-
-      return res.json({
-        message: "successful",
-        token,
-        data: {
-          email,
-          password
-        }
-      });
-    }
+    return res.json({
+      message: "successful",
+      token: foundUser.token,
+      data: foundUser.user
+    });
+  } catch (error) {
+    return res.json({
+      message: "failed",
+      data: error.message
+    });
   }
-
-  return res.json({
-    message: "failed",
-    data: "wrong username or password"
-  });
 };
 
 const register = async (req, res) => {

@@ -1,4 +1,6 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt"); 
+var jwt = require('jsonwebtoken');
+
 
 const UserModel = require("../models").User;
 
@@ -18,10 +20,16 @@ const login = async (req, res) => {
 
   if (foundUser) {
     const checkPassword = await bcrypt.compare(password, foundUser.password);
-    if (checkPassword) {
+    if (checkPassword) { 
+
+      // var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+
+      const privateKey = "rashid"; 
+      const token =  await jwt.sign({ foundUser }, privateKey);
+      
       return res.json({
         message: "successful",
-        token: "adsfadsfa1ds2fasd23fa1dsfad32sf1ads2f1a",
+        token: token,
         data: {
           email,
           password

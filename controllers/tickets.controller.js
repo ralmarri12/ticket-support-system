@@ -5,17 +5,9 @@ const { createTicket, getTicket } = require("../helpers/tickets.helper");
 const getTickets = async (req, res) => {
   try {
     const result = await getTicket(req.user);
-    return res.json({
-      message: "success",
-      data: {
-        result
-      }
-    });
+    return res.sendSuccess(result);
   } catch (error) {
-    return res.json({
-      message: "failed",
-      data: error.message
-    });
+    return res.sendError(error);
   }
 };
 
@@ -26,17 +18,9 @@ const addTicket = async (req, res) => {
       req.body.title,
       req.body.description
     );
-    return res.json({
-      message: "success",
-      data: {
-        result
-      }
-    });
+    return res.sendSuccess(result);
   } catch (error) {
-    return res.json({
-      message: "failed",
-      data: error.message
-    });
+    return res.sendError(error);
   }
 };
 

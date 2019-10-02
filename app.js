@@ -12,6 +12,24 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.sendSuccess = function(data) {
+    this.json({
+      message: "success",
+      data
+    });
+  };
+
+  res.sendError = function(error) {
+    this.json({
+      message: "Failure",
+      error: error.messa
+    });
+  };
+
+  next();
+});
+
 app.use(routes);
 
 app.listen(port, () => {

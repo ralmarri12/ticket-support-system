@@ -6,17 +6,9 @@ const login = async (req, res) => {
       req.body.email.trim(),
       req.body.password.trim()
     );
-
-    return res.json({
-      message: "successful",
-      token: foundUser.token,
-      data: foundUser.user
-    });
+    return res.sendSuccess({ user: foundUser.user, token: foundUser.token });
   } catch (error) {
-    return res.json({
-      message: "failed",
-      data: error.message
-    });
+    return res.sendError(error);
   }
 };
 
@@ -28,16 +20,9 @@ const register = async (req, res) => {
       req.body.password.trim()
     );
 
-    return res.json({
-      message: "successful",
-      token: register.token,
-      data: register.user
-    });
+    return res.sendSuccess({ user: register.user, token: register.token });
   } catch (error) {
-    return res.json({
-      message: "failed",
-      data: error.message
-    });
+    return res.sendError(error);
   }
 };
 

@@ -1,30 +1,43 @@
 const TicketModel = require("../models").Ticket;
 
-const getTickets =  async (req, res) => { 
-    const getAllTickets = await TicketModel.findAll();
+const { createTicket, getTicket } = require("../helpers/tickets.helper");
 
-    res.json(getAllTickets); 
-}  
+const getTickets = async (req, res) => {
+  try {
+    const result = await getTicket(req.user);
+    return res.json({
+      message: "success",
+      data: {
+        result
+      }
+    });
+  } catch (error) {
+    return res.json({
+      message: "failed",
+      data: error.message
+    });
+  }
+};
 
-const addTicket = async (req, res) => { 
+const addTicket = async (req, res) => {
+  try {
+    const result = await createTicket(
+      req.user.id,
+      req.body.title,
+      req.body.description
+    );
+    return res.json({
+      message: "success",
+      data: {
+        result
+      }
+    });
+  } catch (error) {
+    return res.json({
+      message: "failed",
+      data: error.message
+    });
+  }
+};
 
-    const u_id = req.body.u_id; 
-    const description = req.body.description;  
-
-    const ticketToAdd = {
-        u_id: u_id, 
-        description: description, 
-        status: "Received"
-    }; 
-
-    const result = await TicketModel.create(ticketToAdd);
-
-    return res.json ({ 
-        message: "success", 
-        data:  { 
-            result
-        }
-    }); 
-}
-
-module.exports = { getTickets, addTicket }; 
+module.exports = { getTickets, addTicket };

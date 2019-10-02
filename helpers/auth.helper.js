@@ -45,8 +45,7 @@ const registerProcess = async (name, email, password) => {
   const userToRegister = {
     name,
     email,
-    password: hashedPassword,
-    g_id: "customer"
+    password: hashedPassword
   };
 
   const result = await UserModel.create(userToRegister);

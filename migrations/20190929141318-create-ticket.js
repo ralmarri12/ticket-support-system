@@ -9,13 +9,17 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       u_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: false
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "received" 
       },
       created_at: {
         allowNull: false,

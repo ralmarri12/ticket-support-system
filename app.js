@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   res.sendError = function(error) {
     this.json({
       message: "Failure",
-      error: error.messa
+      error: error.message
     });
   };
 

@@ -21,23 +21,23 @@ const decodeToken = async token => {
 const loginProcess = async (email, password) => {
   const user = await findUserByEmail(email);
   if (user) {
-   
+    if (user.correctPassword(password)) {
       const token = await generateToken(user.dataValues);
       return {
         user,
         token
       };
+    }
   }
 
   throw new Error("WRONG_PASSWORD_OR_USERNAME");
 };
 
 const registerProcess = async (name, email, password) => {
-
   const userToRegister = {
     name,
     email,
-    password,
+    password
   };
 
   const result = await UserModel.create(userToRegister);

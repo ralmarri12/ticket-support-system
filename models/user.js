@@ -1,6 +1,6 @@
-"use strict"; 
+"use strict";
 
-const crypto = require("crypto");  
+const crypto = require("crypto");
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -14,14 +14,17 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       email: {
-        type: DataTypes.STRING, 
+        type: DataTypes.STRING,
         unique: true,
         validate: {
           isEmail: true
         }
       },
-      password: { 
-        type: DataTypes.STRING
+      password: {
+        type: DataTypes.STRING,
+        validate: {
+          len: [8, 255]
+        }
       }
     },
     {}
@@ -32,23 +35,23 @@ module.exports = (sequelize, DataTypes) => {
 
   User.encryptPassword = function(password) {
     return crypto
-        .createHash('RSA-SHA256')
-        .update(password)
-        .update(process.env.ENC_KEY)
-        .digest('hex')
-  }; 
+      .createHash("RSA-SHA256")
+      .update(password)
+      .update(process.env.ENC_KEY)
+      .digest("hex");
+  };
 
-  const setSaltAndPassword = user => { 
-    if (user.changed('password')) {
-        user.password = User.encryptPassword(user.password);
+  const setSaltAndPassword = user => {
+    if (user.changed("password")) {
+      user.password = User.encryptPassword(user.password);
     }
-};
-User.beforeCreate(setSaltAndPassword)
-User.beforeUpdate(setSaltAndPassword) 
+  };
+  User.beforeCreate(setSaltAndPassword);
+  User.beforeUpdate(setSaltAndPassword);
 
-User.prototype.correctPassword = function(enteredPassword) {
-  return User.encryptPassword(enteredPassword) === this.password
-}
+  User.prototype.correctPassword = function(enteredPassword) {
+    return User.encryptPassword(enteredPassword) === this.password;
+  };
 
   return User;
 };

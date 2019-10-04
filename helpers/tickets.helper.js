@@ -1,7 +1,24 @@
 const TicketModel = require("../models").Ticket;
 
-const getTicketsProccess = async user => {
-  return await TicketModel.findAll();
+const getTicketsProccess = async (user, page) => {
+
+
+  if (page < 0) {
+    throw new Error("Page number does not make any sense");
+  }
+
+  const offset = parseInt(page * process.env.PAGE_SIZE);
+  const limit = parseInt(offset + process.env.PAGE_SIZE);
+
+  const result = await TicketModel.findAll({
+    limit,
+    offset
+  }); 
+  if (result && result.length > 0) {
+    return result;
+  }
+
+  throw new Error("no result");
 };
 
 const createTicket = async (uid, title, content) => {
@@ -13,6 +30,22 @@ const createTicket = async (uid, title, content) => {
   return await TicketModel.create(ticketToAdd);
 };
 
-const getTicketById = async ticketID => {};
+const getTicketById = async (ticketID) => {
+  const result = await TicketModel.findOne({
+    where: {
+      id: ticketID
+    }
+  });
 
-module.exports = { getTicketsProccess, createTicket };
+  if (result) {
+    return result;
+  }
+
+  throw new Error("Data is not available");
+};
+
+module.exports = {
+  getTicketsProccess,
+  createTicket,
+  getTicketById
+};

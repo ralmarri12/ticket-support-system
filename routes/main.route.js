@@ -15,7 +15,8 @@ const {
   addTicket
 } = require("../controllers/tickets.controller");
 Router.get("/tickets", authorize, getTickets);
-Router.get("/tickets/:ticket_id", authorize, getTicket);
+Router.get("/tickets/:page", authorize, getTickets);
+Router.get("/ticket/:ticket_id", authorize, getTicket);
 Router.post("/tickets", authorize, addTicket);
 //#endregion (Ticket routes)
 

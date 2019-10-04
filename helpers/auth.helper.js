@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 
 const UserModel = require("../models").User;
@@ -19,33 +18,26 @@ const decodeToken = async token => {
   return jwt.verify(token, process.env.ENC_KEY);
 };
 
-const compareHashedPassword = async (hashedPassword, plainPassword) => {
-  return bcrypt.compare(plainPassword, hashedPassword);
-};
-
 const loginProcess = async (email, password) => {
   const user = await findUserByEmail(email);
   if (user) {
-    const compareResult = await compareHashedPassword(user.password, password);
-    if (compareResult) {
+   
       const token = await generateToken(user.dataValues);
       return {
         user,
         token
       };
-    }
   }
 
   throw new Error("WRONG_PASSWORD_OR_USERNAME");
 };
 
 const registerProcess = async (name, email, password) => {
-  const hashedPassword = await bcrypt.hash(password, 10);
 
   const userToRegister = {
     name,
     email,
-    password: hashedPassword
+    password,
   };
 
   const result = await UserModel.create(userToRegister);

@@ -1,10 +1,13 @@
 const TicketModel = require("../models").Ticket;
 
-const { createTicket, getTicket } = require("../helpers/tickets.helper");
+const {
+  createTicket,
+  getTicketsProccess
+} = require("../helpers/tickets.helper");
 
 const getTickets = async (req, res) => {
   try {
-    const result = await getTicket(req.user);
+    const result = await getTicketsProccess(req.user);
     return res.sendSuccess(result);
   } catch (error) {
     return res.sendError(error);
@@ -24,4 +27,8 @@ const addTicket = async (req, res) => {
   }
 };
 
-module.exports = { getTickets, addTicket };
+const getTicket = async (req, res) => {
+  const ticketID = req.params.ticket_id;
+};
+
+module.exports = { getTickets, addTicket, getTicket };

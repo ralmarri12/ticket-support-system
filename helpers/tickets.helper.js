@@ -1,6 +1,6 @@
 const TicketModel = require("../models").Ticket;
 
-const getTicket = async user => {
+const getTicketsProccess = async user => {
   return await TicketModel.findAll();
 };
 
@@ -13,4 +13,6 @@ const createTicket = async (uid, title, content) => {
   return await TicketModel.create(ticketToAdd);
 };
 
-module.exports = { getTicket, createTicket };
+const getTicketById = async ticketID => {};
+
+module.exports = { getTicketsProccess, createTicket };

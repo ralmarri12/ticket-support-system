@@ -1,4 +1,5 @@
 const TicketModel = require("../models").Ticket;
+const {getCommentsByTicketID} = require("../helpers/comments.helper");  
 
 const getTicketsProccess = async (user, page) => {
   if (page < 0) {
@@ -41,14 +42,14 @@ const createTicket = async (uid, title, content) => {
 };
 
 const getTicketById = async ticketID => {
-  const result = await TicketModel.findOne({
+  let result = await TicketModel.findOne({
     where: {
       id: ticketID
     }
   });
 
   if (result) {
-    return result;
+    return {ticket: result, comments: await getCommentsByTicketID(ticketID)};
   }
 
   throw new Error("Data is not available");

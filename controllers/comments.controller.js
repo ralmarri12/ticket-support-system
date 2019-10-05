@@ -1,8 +1,13 @@
 const CommentModel = require("../models").Comment;
 
-const getComments = async (req, res) => {
-  const getAllComments = await CommentModel.findAll();
-  res.json(getAllComments);
+const getComments = async (req, res) => { 
+
+  try { 
+    const result = getCommentsByTicketID(req.param.t_id); 
+    return res.sendSuccess(result);
+    } catch(error) {
+      return res.sendError(error)
+    }
 };
 
 const postComment = async (req, res) => {
@@ -10,7 +15,7 @@ const postComment = async (req, res) => {
   const t_id = req.body.t_id;
   const content = req.body.content;
 
-  const commentToPost = {
+  const commentToPost = { 
     u_id: u_id,
     t_id: t_id,
     content: content

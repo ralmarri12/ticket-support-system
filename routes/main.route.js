@@ -21,11 +21,7 @@ Router.post("/tickets", authorize, addTicket);
 //#endregion (Ticket routes)
 
 //#region (Comment Routes)
-const {
-  getComments,
-  postComment
-} = require("../controllers/comments.controller");
-Router.get("/comments", authorize, getComments);
+const { postComment } = require("../controllers/comments.controller");
 Router.post("/comments", authorize, postComment);
 
 //#endregion

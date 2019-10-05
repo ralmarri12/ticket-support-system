@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
           len: [4, 255]
         }
       },
+      g_id: {
+        type: DataTypes.STRING
+      },
       email: {
         type: DataTypes.STRING,
         unique: true,

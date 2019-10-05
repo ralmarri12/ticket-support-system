@@ -15,12 +15,14 @@ const getTicketsProccess = async (user, page) => {
       offset,
       where: {
         u_id: user.id
-      }
+      },
+      attributes: ["id", "u_id", "title", "status", "createdAt"]
     });
   } else {
     result = await TicketModel.findAll({
       limit,
-      offset
+      offset,
+      attributes: ["id", "u_id", "title", "status", "createdAt"]
     });
   }
 

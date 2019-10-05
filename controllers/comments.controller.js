@@ -20,4 +20,4 @@ const postComment = async (req, res) => {
   });
 };
 
-module.exports = { getCommentsByTicketID, postComment };
+module.exports = { postComment };

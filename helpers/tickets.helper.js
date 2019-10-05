@@ -2,23 +2,34 @@ const TicketModel = require("../models").Ticket;
 
 const getTicketsProccess = async (user, page) => {
 
+    if (page < 0) {
+      throw new Error("Page number does not make any sense");
+    } 
 
-  if (page < 0) {
-    throw new Error("Page number does not make any sense");
-  }
+    const offset = parseInt(page * process.env.PAGE_SIZE);
+    const limit = parseInt(offset + process.env.PAGE_SIZE); 
+    let result;
 
-  const offset = parseInt(page * process.env.PAGE_SIZE);
-  const limit = parseInt(offset + process.env.PAGE_SIZE);
+    if(user.g_id=="customer"){ 
+      result = await TicketModel.findAll({
+        limit,
+        offset, 
+        where: {
+           u_id: user.id 
+        }
+      }); 
+    } else {
+      result = await TicketModel.findAll({
+        limit,
+        offset
+      }); 
+    }
+    
+    if (result && result.length > 0) {
+      return result;
+    }
 
-  const result = await TicketModel.findAll({
-    limit,
-    offset
-  }); 
-  if (result && result.length > 0) {
-    return result;
-  }
-
-  throw new Error("no result");
+    throw new Error("no result");
 };
 
 const createTicket = async (uid, title, content) => {

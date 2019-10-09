@@ -23,7 +23,6 @@ Router.post("/tickets", authorize, addTicket);
 //#region (Comment Routes)
 const { postComment } = require("../controllers/comments.controller");
 Router.post("/comments", authorize, postComment);
-
 //#endregion
 
 module.exports = Router;

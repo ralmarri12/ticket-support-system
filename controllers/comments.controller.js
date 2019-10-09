@@ -5,7 +5,7 @@ const postComment = async (req, res) => {
   const t_id = req.body.t_id;
   const content = req.body.content;
 
-  const commentToPost = {
+  const commentToPost = { 
     u_id: u_id,
     t_id: t_id,
     content: content
@@ -20,4 +20,4 @@ const postComment = async (req, res) => {
   });
 };
 
-module.exports = { getCommentsByTicketID, postComment };
+module.exports = { postComment };

@@ -9,7 +9,7 @@ const {
 const getTickets = async (req, res) => {
   try {
     const page = req.params.page || 1;
-    const result = await getTicketsProccess(req.user, page - 1);
+    const result = await getTicketsProccess(req.user, page - 1); 
     return res.sendSuccess(result);
   } catch (error) {
     return res.sendError(error);

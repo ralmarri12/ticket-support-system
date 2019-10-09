@@ -5,8 +5,8 @@
 - [x] Get tickets based on user type
 - [x] Get ticket with comments
 - [x] Fix tickets routing issues
-- [ ] Secure the backend
-- [ ] Finalization
+- [x] Secure the backend
+- [x] Finalization
 
 Rashid F.
 Hasan F.

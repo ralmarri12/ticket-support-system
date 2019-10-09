@@ -1,4 +1,4 @@
-# Next steps.
+# Alpha 1.0 Check List.
 
 - [x] Password length validation
 - [x] Get ticket, and get tickets
@@ -7,6 +7,9 @@
 - [x] Fix tickets routing issues
 - [x] Secure the backend
 - [x] Finalization
+
+# 1.x
+- [ ] Update ticket status - v1.1
 
 Rashid F.
 Hasan F.

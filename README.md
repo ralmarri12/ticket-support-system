@@ -10,6 +10,7 @@
 
 # 1.x
 - [ ] Update ticket status - v1.1
+- [ ] Integrataion of Email processes - v1.2
 
 Rashid F.
 Hasan F.

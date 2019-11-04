@@ -1,5 +1,5 @@
 const CommentModel = require('../models').Comment;  
-const UserModel = require('../models/user')
+const UserModel = require('../models').User;
 const getCommentsByTicketID = async (t_id) => {
     
     return await CommentModel.findAll({

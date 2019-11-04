@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasMany(models.Comment, { foreignKey: "id", targetKey: "u_id" });
   };
 
   User.encryptPassword = function(password) {

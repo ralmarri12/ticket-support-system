@@ -9,6 +9,7 @@
 - [x] Finalization
 
 # 1.x
+- [ ] Fix https://github.com/ralmarri12/ticket-support-system/issues/1
 - [ ] Update ticket status - v1.1
 - [ ] Integrataion of Email processes - v1.2
 

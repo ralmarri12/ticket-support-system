@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  return res.send("TSS Backend works!");
+  return res.send("TSS automated deploy works!");
 });
 
 app.use(express.json());

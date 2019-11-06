@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.use(function(req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://tss-frontend.herokuapp.com/"
+    "https://tss-frontend.herokuapp.com"
   );
   res.header(
     "Access-Control-Allow-Headers",
